@@ -5,7 +5,11 @@
     "dev": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "start": "deno serve -A _fresh/server.js",
-    "update": "deno run -A -r jsr:@fresh/update ."
+    "update": "deno run -A -r jsr:@fresh/update .",
+    "arbitrage": "deno run -A --env arbitrage-bot/main.ts",
+    "arbitrage:test": "deno test --allow-env arbitrage-bot/tests.ts",
+    "arbitrage:debug": "DEBUG=true deno run -A --env arbitrage-bot/main.ts",
+    "arbitrage:simulate": "SIMULATION_MODE=true deno run -A --env arbitrage-bot/main.ts"
   },
   "lint": {
     "rules": {
@@ -16,12 +20,15 @@
     }
   },
   "exclude": [
-    "**/_fresh/*"
+    "**/_fresh/*",
+    "logs/*",
+    ".env"
   ],
   "imports": {
     "fresh": "jsr:@fresh/core@^2.0.0-alpha.60",
     "preact": "npm:preact@^10.27.1",
-    "@preact/signals": "npm:@preact/signals@^2.3.1"
+    "@preact/signals": "npm:@preact/signals@^2.3.1",
+    "std/": "https://deno.land/std@0.208.0/"
   },
   "compilerOptions": {
     "lib": [
